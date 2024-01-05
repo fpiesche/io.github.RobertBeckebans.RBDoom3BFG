@@ -1,11 +1,12 @@
-app-id: io.github.RobertBeckebans.RBDoom3BFG-GL
+app-id: io.github.RobertBeckebans.RBDoom3BFG
 runtime: org.freedesktop.Platform
-runtime-version: '22.08'
+runtime-version: '23.08'
 sdk: org.freedesktop.Sdk
 command: rbdoom3bfg.sh
 finish-args:
   - --device=all
   - --socket=x11
+  - --socket=wayland
   - --socket=pulseaudio
   - --share=ipc
   - --share=network
@@ -18,7 +19,7 @@ cleanup:
   - /share/cmake
 modules:
 
-  - shared-modules/glu/glu-9.json
+  # - shared-modules/glu/glu-9.json
 
   # Build application from Git sources
   - name: rbdoom3bfg-build
@@ -34,7 +35,10 @@ modules:
     sources:
       - type: git
         url: https://github.com/RobertBeckebans/RBDOOM-3-BFG
-        tag: v1.4.0
+        tag: v1.5.1
+        x-checker-data:
+          type: git
+          tag-pattern: "^v([\\d.]+)$"
       - type: file
         path: RBDoom3BFG.metainfo.xml
       - type: file
